@@ -69,9 +69,9 @@ extern int LogOpenMode;
  *       things for the log.
  */
 int32_t logend;			/* address of the end of last log record */
-struct logsuper logsup;		/* log super block */
-int32_t numdoblk;		/* number of do blocks used     */
-int32_t numnodofile;		/* number of nodo file blocks used  */
+extern struct logsuper logsup;		/* log super block */
+extern int32_t numdoblk;		/* number of do blocks used     */
+extern int32_t numnodofile;		/* number of nodo file blocks used  */
 
 /* + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
  *
@@ -124,7 +124,7 @@ struct vopen volume;
  */
 
 /* buffer header table */
-struct bufhdr {
+struct bufhdr_fdp {
 	int16_t next;		/* 2: next on free/lru list */
 	int16_t prev;		/* 2: previous on free/lru list */
 	int16_t hnext;		/* 2: next on hash chain */
@@ -134,27 +134,30 @@ struct bufhdr {
 	int16_t reserve;	/* 2 */
 	int32_t vol;		/* 4: minor of agrregate/lv number */
 	pxd_t pxd;		/* 8: on-disk page pxd */
-} bufhdr[NBUFPOOL];		/* (24) */
+};
+extern struct bufhdr_fdp bufhdr[NBUFPOOL];		/* (24) */
 
 /* buffer table */
 struct bufpool {
 	char bytes[PSIZE];
-} buffer[NBUFPOOL - 1];
+};
+
+extern struct bufpool buffer[NBUFPOOL - 1];
 
 /*
  *      log page buffer cache
  *
  * log has its own 4 page buffer pool.
  */
-uint8_t afterdata[LOGPSIZE * 2];	/* buffer to read in redopage data */
+extern uint8_t afterdata[LOGPSIZE * 2];	/* buffer to read in redopage data */
 
 /*
  * Miscellaneous
  */
-caddr_t prog;			/* Program name */
-int32_t mntcnt, bufsize;
-char *mntinfo;
-int32_t retcode;		/* return code from logredo    */
+extern caddr_t prog;			/* Program name */
+extern int32_t mntcnt, bufsize;
+extern char *mntinfo;
+extern int32_t retcode;		/* return code from logredo    */
 
 /*
  * external references

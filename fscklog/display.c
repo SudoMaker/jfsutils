@@ -54,7 +54,7 @@ FILE *infp;
  * output: fsck extracted service log I/O buffer
  *
  */
-char xchklog_buffer[XCHKLOG_BUFSIZE];
+extern char xchklog_buffer[XCHKLOG_BUFSIZE];
 
 /* + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
  *
